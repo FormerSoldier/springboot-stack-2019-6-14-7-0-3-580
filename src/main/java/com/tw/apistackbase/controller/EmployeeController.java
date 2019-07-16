@@ -14,14 +14,23 @@ public class EmployeeController {
         return Employee.createTestEmployees();
     }
     @PostMapping
-    public int addEmployee(@RequestBody Employee employee){
-        return employee.getId();
+    public List<Employee> addEmployee(@RequestBody Employee employee){
+        List<Employee> employees = Employee.createTestEmployees();
+        employees.add(employee);
+        return employees;
     }
 
     @DeleteMapping("/{id}")
     public List<Employee> deleteEmployeeById(@PathVariable int id){
         List<Employee> employees = Employee.createTestEmployees();
         employees.remove(id);
+        return employees;
+    }
+
+    @PutMapping
+    public List<Employee> updateEmployee(@RequestBody Employee employee){
+        List<Employee> employees = Employee.createTestEmployees();
+        employees.set(employee.getId(),employee);
         return employees;
     }
 
